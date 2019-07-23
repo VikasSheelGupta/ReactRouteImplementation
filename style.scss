@@ -1,0 +1,23 @@
+#main {
+    overflow-y: auto;
+    height: 320px;
+    
+    #internal-header {
+        position: fixed;
+        top: 0;
+    }
+
+    #content {
+        margin-top: 45px;
+        }
+        }
+
+      .input-field{
+      width:220px;
+      margin-left:10px;
+      margin-top:20px;
+        
+      &.active{
+      border:2px solid blue;
+      }
+      }
