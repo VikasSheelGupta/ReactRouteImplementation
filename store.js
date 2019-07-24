@@ -11,9 +11,11 @@ class PANStore extends EventEmmiter {
     }
 // To call API
     fetchData = (data, headers, level) => {
-        if (Object.keys(this.storeData[level]).length < 1) {
+ //       this.storeData = { ...this.storeData, level: level };
+        if (Object.keys(this.storeData.statesData).length < 1) {
             postFetchApiData(getPesticideUrl(), data, headers, this.getApiData);
         } else {
+
             this.emit("store_state_updated");
 
         }
@@ -27,9 +29,10 @@ class PANStore extends EventEmmiter {
 
             let apiResult = response.pd;
             this.storeData = {
+
                 ...this.storeData,
 
-                [this.storeData.level]: apiResult !== null ? apiResult : [],
+                statesData: apiResult !== null ? apiResult : [],
             };
             }
             this.emit("store_state_updated");
