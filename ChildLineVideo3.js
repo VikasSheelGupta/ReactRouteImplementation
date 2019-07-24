@@ -6,6 +6,7 @@ import GlobalStore from '../../../stores';
 import Constant from '../../../constants';
 import * as GlobalActions from '../../../actions';
 import Footer from '../../Shared/Footer';
+import PANStore from "./store";
 
 export default class ChildLineVideo3 extends Component {
   constructor() {
@@ -75,11 +76,19 @@ export default class ChildLineVideo3 extends Component {
             })
             document.querySelector('.active').focus();
           }
-          //if(keyObject.event.key === Constant.KEY_RSK){
-           // keyObject.currentElement.click();
-          //}
+    if(keyObject.event.key === Constant.KEY_RSK){
+        if (this.state.inputValue) {
+      
+            let params = {
+               "inputValue": this.state.inputValue
+            }
+            params = { ...params, ...this.state.params };
+            PANStore.setPANDetails(this.state.headers, params, () => {
+                document.getElementById("rsk").click();
+            });
       }
-
+    }
+}
       keyDownDispatch = keyDown => {
    
         GlobalStore.isPreventDefault = true;
@@ -110,10 +119,11 @@ export default class ChildLineVideo3 extends Component {
     console.log("isPreventDefault",GlobalStore.isPreventDefault);
     return (
       <div>
-      <InternalHeader header={"PAN Query "}/>
+      <InternalHeader header={"Track Your PAN Card "}/>
           <div className="description">
           <input type="text"
           value = {this.state.inputValue}
+          placeholder="Enter Pan Number"
           onChange={(event)=>this.changeinputValue(event)}
           className= {this.state.navIndex=== 0 ? "active up-down input-field" : " up-down input-field"} />
           <input type="text"
